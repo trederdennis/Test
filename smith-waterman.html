@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smith-Waterman</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background-color: #f8f5f0;
+      color: #2a2a2a;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative; /* Damit wir die Buttons und den Link relativ zum Container positionieren können */
+    }
+
+    header {
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #2a2a2a;
+      font-weight: bold;
+      transition: color 0.2s ease-in-out;
+    }
+
+    a:hover {
+      color: #555555;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-top: 20px;
+    }
+
+    /* Button-Style für die Navigation */
+    .nav-button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .nav-button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Icon-Style */
+    .nav-button img {
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Container für den Text */
+    .text-container {
+      margin-top: 30px;
+      font-size: 1.2rem;
+    }
+
+    /* Textabschnitte */
+    .text-section {
+      display: none;
+    }
+
+    .text-section.active {
+      display: block;
+    }
+
+    /* Positionierung der Navigationsbuttons */
+    .nav-buttons {
+      position: absolute;
+      bottom: 10px; /* Abstand zum unteren Rand */
+      width: 100%; /* Damit die Buttons die gesamte Breite ausnutzen */
+      display: flex;
+      justify-content: space-between; /* Positioniert die Buttons links und rechts */
+    }
+
+    /* Zurück zur Startseite Link unten in der Mitte */
+    .back-link {
+      position: absolute;
+      bottom: 10px; /* Abstand zum unteren Rand */
+      left: 50%; /* Setzt den Link in die Mitte */
+      transform: translateX(-50%); /* Verschiebt den Link exakt in die Mitte */
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Smith-Waterman</h1>
+    </header>
+    
+    <!-- Textabschnitte -->
+    <div class="text-container">
+      <div class="text-section active" id="section1">
+        <p>
+          Der Smith-Waterman-Algorithmus ist ein Verfahren für die lokale Sequenz-Ausrichtung.
+          Er findet ähnliche Regionen zwischen zwei Sequenzen, z. B. DNA oder RNA.
+        </p>
+      </div>
+      <div class="text-section" id="section2">
+        <p>
+          Im Gegensatz zum Needleman-Wunsch-Algorithmus sucht Smith-Waterman nur nach der besten
+          lokalen Übereinstimmung, anstatt eine vollständige Sequenz zu alignieren.
+        </p>
+      </div>
+      <div class="text-section" id="section3">
+        <p>
+          Der Algorithmus wird häufig in der Bioinformatik verwendet, insbesondere bei der Analyse
+          von Sequenzdaten, wie sie in Genetik und Proteomik vorkommen.
+        </p>
+      </div>
+    </div>
+
+    <!-- Navigationsbuttons -->
+    <div class="nav-buttons">
+      <button class="nav-button" id="left-button">
+        <img src="left-square.svg" alt="Left Arrow">
+      </button>
+      <button class="nav-button" id="right-button">
+        <img src="right-square.svg" alt="Right Arrow">
+      </button>
+    </div>
+
+    <!-- Zurück zur Startseite Link -->
+    <p class="back-link"><a href="index.html">Zurück zur Startseite</a></p>
+  </div>
+
+  <script>
+    // JavaScript für das Wechseln des Textes
+    let currentSection = 0;
+    const sections = document.querySelectorAll('.text-section');
+    const leftButton = document.getElementById('left-button');
+    const rightButton = document.getElementById('right-button');
+    
+    // Funktion zum Wechseln der Textabschnitte
+    function changeText(direction) {
+      // Verstecke die aktuelle Section
+      sections[currentSection].classList.remove('active');
+      
+      // Berechne die neue Section basierend auf der Richtung
+      if (direction === 'left') {
+        currentSection = (currentSection === 0) ? sections.length - 1 : currentSection - 1;
+      } else if (direction === 'right') {
+        currentSection = (currentSection === sections.length - 1) ? 0 : currentSection + 1;
+      }
+      
+      // Zeige die neue Section an
+      sections[currentSection].classList.add('active');
+    }
+
+    // Event Listener für die Buttons
+    leftButton.addEventListener('click', () => changeText('left'));
+    rightButton.addEventListener('click', () => changeText('right'));
+  </script>
+</body>
+</html>
