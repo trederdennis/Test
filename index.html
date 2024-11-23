@@ -13,6 +13,7 @@
       background-color: #f8f5f0; /* Cremefarbener Hintergrund */
       color: #2a2a2a; /* Dunkler Text */
       line-height: 1.6;
+      overflow: hidden; /* Verhindert Scrollen außerhalb des Bereichs */
     }
 
     /* Seitenlayout */
@@ -78,6 +79,34 @@
     .method a:hover h2 {
       text-decoration: underline;
     }
+
+    /* Pufferfisch-Animation */
+    .pufferfish {
+      position: absolute;
+      bottom: -100px; /* Start unterhalb der Seite */
+      left: 50%; /* Horizontal zentriert */
+      transform: translateX(-50%); /* Zentrierung durch Verschiebung */
+      width: 100px;
+      height: 100px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/e/e7/Tetraodontidae_Pufferfish.jpg') no-repeat center;
+      background-size: cover;
+      animation: swim 5s infinite ease-in-out;
+    }
+
+    /* Animation für den Pufferfisch */
+    @keyframes swim {
+      0% {
+        bottom: -100px; /* Startpunkt */
+        transform: translateX(-50%) scale(1);
+      }
+      50% {
+        transform: translateX(-50%) scale(1.1); /* Leichtes Vergrößern */
+      }
+      100% {
+        bottom: 100%; /* Endpunkt oben */
+        transform: translateX(-50%) scale(1);
+      }
+    }
   </style>
 </head>
 <body>
@@ -85,6 +114,9 @@
     <!-- Header -->
     <header>
       <h1>Alignment Methoden</h1>
+      <nav>
+        <a href="about.html">Über</a>
+      </nav>
     </header>
 
     <!-- Needleman-Wunsch -->
@@ -103,5 +135,8 @@
       </a>
     </div>
   </div>
+
+  <!-- Pufferfisch -->
+  <div class="pufferfish"></div>
 </body>
 </html>
